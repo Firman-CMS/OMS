@@ -1,0 +1,15 @@
+{
+    "name": "Oms",
+    "alias": "oms",
+    "description": "",
+    "keywords": [],
+    "active": 1,
+    "order": 0,
+    "providers": [
+        "Modules\\Oms\\Providers\\OmsServiceProvider"
+    ],
+    "aliases":{},
+    "files": [
+        "start.php"
+    ]
+}
