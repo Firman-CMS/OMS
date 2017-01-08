@@ -58,6 +58,92 @@ class Cms_model {
         
     }
     
+    public static function getAllRole($id = '') {
+
+        $sql = DB::table('oms_role')                
+                ->select('id','name', 'description');
+                
+        if ($id !== "") {
+            return $sql->where('id', '=', $id)->first();
+        }
+        
+        return $sql->get();
+        
+    }
+    
+    public static function getAllPermission() {
+        return DB::table('oms_permission')->select('id','name','description')->get();
+    }
+    
+    public static function getAllSelectedPermission($role_id) {
+        return DB::table('oms_role_permission')
+                ->select('oms_permission.id')
+                ->join('oms_permission', 'oms_permission.id', '=', 'oms_role_permission.permission_id')
+                ->where('oms_role_permission.role_id', $role_id)->get();
+    }
+    
+    public static function getAllSelectedRole($user_id) {
+        return DB::table('oms_role_user')
+                ->select('oms_role_user.role_id')
+                ->join('oms_login', 'oms_login.user_id', '=', 'oms_role_user.user_id')
+                ->where('oms_role_user.user_id', $user_id)->get();
+    }
+    
+    public static function updatePermissions($id, array $data) {
+        DB::table('oms_role_permission')->where('role_id', $id)->delete();
+        
+        foreach($data as $val) {
+            DB::insert('insert into oms_role_permission (role_id, permission_id) values (?, ?)', 
+                    [
+                        $id,                         
+                        $val
+                    ]);
+        }
+        
+        return true;
+    }
+    
+    public static function updateUserRole($id, array $data) {
+        DB::table('oms_role_user')->where('user_id', $id)->delete();
+        
+        foreach($data as $val) {
+            DB::insert('insert into oms_role_user(user_id, role_id) values (?, ?)', 
+                    [
+                        $id,                         
+                        $val
+                    ]);
+        }
+        
+        return true;
+    }
+    
+    public static function insertRole($data = array()) {
+        DB::insert('insert into oms_role (name, description) values (?, ?)', 
+                    [
+                        $data['name'],                        
+                        $data['description'],
+                    ]);
+
+        $lastId = DB::getPdo()->lastInsertId();
+        return $lastId;
+    }
+    
+    public static function updateRole($data = array()) {
+        DB::table('oms_role')->where('id', '=', $data['id'])->update([
+            'name' => $data['name'],
+            'description' => $data['description']
+        ]); 
+        
+        return true;
+    }
+    
+    public static function deleteRole($id) {
+        DB::table('oms_role')->where('id', '=', $id)->delete(); 
+        DB::table('oms_role_permission')->where('role_id', '=', $id)->delete(); 
+        
+        return true;
+    }
+    
     public static function insertPrivilege($privilegeArray = array()) {
 
         DB::insert('insert into oms_privilege (privilege_name, privilege_code) values (?, ?)', 

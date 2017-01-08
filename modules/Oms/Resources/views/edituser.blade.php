@@ -80,23 +80,22 @@
                     </div>
                     @endif
                     
-                    {!! Form::hidden('privilege', $privilege , ['id' => 'privilege','class'=>'form-control add-top-margin'] ) !!}
+<!--                    {!! Form::hidden('privilege', $privilege , ['id' => 'privilege','class'=>'form-control add-top-margin'] ) !!}
                     @if($session['category'] == "S")
                     <div class="form-group">              
                         <label>Privilege</label>
-                        {{dd($allPrivilege)}}
                         <select class="form-control" id="privilege" name="newPrivilege">
                             
                             @foreach($allPrivilege as $allPrivilegeDetail)
                             <option value="{{$allPrivilegeDetail->privilege_code}}" @if($privilege == "A") {{'selected'}} @endif >{{$allPrivilegeDetail->privilege_name}}</option>
                             @endforeach
-<!--                            <option value="A" @if($privilege == "A") {{'selected'}} @endif >{{'Admin'}}</option>
+                            <option value="A" @if($privilege == "A") {{'selected'}} @endif >{{'Admin'}}</option>
                             <option value="S" @if($privilege == "S") {{'selected'}} @endif >{{'Owner'}}</option>
                             <option value="C" @if($privilege == "C") {{'selected'}} @endif >{{'Akunting'}}</option>
-                            <option value="M" @if($privilege == "M") {{'selected'}} @endif >{{'Marketing'}}</option>-->
+                            <option value="M" @if($privilege == "M") {{'selected'}} @endif >{{'Marketing'}}</option>
                         </select>                     
                     </div>
-                    @endif
+                    @endif-->
                     
                     <div class="form-group">              
                         <label>Nama</label>
@@ -126,7 +125,19 @@
                         <label>Tanggal Lahir</label>
                         {!! Form::text('birthdate', $birthday , ['id' => 'datepicker','class'=>'form-control add-top-margin', 'placeholder'=>'Tanggal Lahir' ] ) !!}                        
                     </div>
-                                        
+                    
+                    <div class="form-group">              
+                        <label>Roles</label>
+                        <div>
+                        @foreach($roles as $role)
+                            @if(in_array($role->id, $selected))
+                                <input checked="checked" type="checkbox" name="roles[]" value="{!! $role->id !!}" /> {!! $role->name !!}<br/>
+                            @else
+                                <input type="checkbox" name="roles[]" value="{!! $role->id !!}" /> {!! $role->name !!}<br/>
+                            @endif
+                        @endforeach
+                        </div>
+                    </div>
                 </div>
                 <div class="col-md-6">
                     <div class="box-body pad">

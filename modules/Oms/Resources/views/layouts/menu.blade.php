@@ -99,7 +99,7 @@
                 <i class="fa fa-angle-left pull-right"></i>
             </a>
             <ul class="treeview-menu">
-                <li><a href="{{route('oms.privilege')}}"><i class="fa fa-cog"></i> Privilege</a></li>
+                <li><a href="{{route('oms.role')}}"><i class="fa fa-cog"></i> Role</a></li>
                 <li>
                     <a href="{{route('oms.changepassword')}}">
                         <i class="fa fa-key"></i> <span>Change Password</span>

@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.1
+-- version 4.5.4.1deb2ubuntu2
 -- http://www.phpmyadmin.net
 --
--- Host: 127.0.0.1
--- Generation Time: Nov 21, 2016 at 09:07 PM
--- Server version: 10.1.16-MariaDB
--- PHP Version: 5.6.24
+-- Host: localhost
+-- Generation Time: Jan 09, 2017 at 12:11 AM
+-- Server version: 5.7.16-0ubuntu0.16.04.1
+-- PHP Version: 7.0.8-0ubuntu0.16.04.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -383,7 +383,7 @@ CREATE TABLE `oms_login` (
 --
 
 INSERT INTO `oms_login` (`user_id`, `name`, `address`, `hp`, `phone`, `email`, `password`, `category_code`, `active`, `birthday`, `createdon`, `isdelete`, `note`) VALUES
-(1, 'Yung Fei.', 'Jakarta', '08992369126', '08992369126', 'yungfei1989@gmail.com', '794885428ddb12e1b64e52fb6650de0e', 'S', 1, '1900-12-29', '0000-00-00', 0, '<p>tes<br></p>');
+(1, 'Yung Fei.', 'Jakarta', '08992369126', '08992369126', 'yungfei1989@gmail.com', '794885428ddb12e1b64e52fb6650de0e', '', 1, '1900-12-29', '0000-00-00', 0, '<p>tes<br></p>');
 
 -- --------------------------------------------------------
 
@@ -403,6 +403,43 @@ CREATE TABLE `oms_marketplace` (
 
 INSERT INTO `oms_marketplace` (`marketplace_id`, `marketplace_name`, `marketplace_prefix`) VALUES
 (1, 'Matahari Mall', 'MM');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `oms_permission`
+--
+
+CREATE TABLE `oms_permission` (
+  `id` int(11) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `description` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `oms_permission`
+--
+
+INSERT INTO `oms_permission` (`id`, `name`, `description`) VALUES
+(1, 'brand-read', 'Read brand menu'),
+(2, 'brand-write', 'Add and update brand menu'),
+(3, 'brand-delete', 'Delete brand data'),
+(4, 'color-read', 'Read color menu'),
+(5, 'color-write', 'Add and update color menu'),
+(6, 'color-delete', 'Delete color data'),
+(7, 'category-read', 'Read category menu'),
+(8, 'category-write', 'Add and update category menu'),
+(9, 'category-delete', 'Delete category data'),
+(10, 'product-read', 'Read product menu'),
+(11, 'product-write', 'Add and update product menu'),
+(12, 'product-delete', 'Delete product data'),
+(13, 'order-read', 'Read order menu'),
+(14, 'role-read', 'Read role menu'),
+(15, 'role-write', 'Add and update role menu'),
+(16, 'role-delete', 'Delete role data'),
+(17, 'user-read', 'Read user menu'),
+(18, 'user-write', 'Add and update user menu'),
+(19, 'user-delete', 'Delete user data');
 
 -- --------------------------------------------------------
 
@@ -471,6 +508,83 @@ INSERT INTO `oms_product` (`product_id`, `productES_id`, `sku`, `product_name`, 
 (1, 14, 'S-18NLA', 'LG AC Split 2 PK S-18NLA - Putih', 2, 1, 2, '8599000', '50', '35', '[{"sequence":"1","description":" Filter udara untuk anti bakteri dan jamur"},{"sequence":"2","description":" Proses pendinginan yang cepat"},{"sequence":"3","description":" Desain yang menawan"},{"sequence":"4","description":" Pengatur otomatis"}]', 'Dinginkan ruangan secara cepat dengan teknologi Jet Cool yang dapat menyejukkan ruangan dalam waktu 3 menit. Dengan filter udaranya LG AC Split 2 PK mencegah bakteri dan debu menganggu waktu istirahat Sahabat ESer. Dilengkapi tombol Deep Sleep untuk mengatur temperatur ruangan secara otomatis dan membuat Sahabat ESer dapat tidur lebih nyenyak.', '[{"sequence":"1","path":"http:\\/\\/www.es.id\\/media\\/dem\\/S-18NLA\\/S-18NLA_1.jpg"},{"sequence":"2","path":"http:\\/\\/www.es.id\\/media\\/dem\\/S-18NLA\\/S-18NLA_2.jpg"},{"sequence":"3","path":"http:\\/\\/www.es.id\\/media\\/dem\\/S-18NLA\\/S-18NLA_3.jpg"},{"sequence":"4","path":"http:\\/\\/www.es.id\\/media\\/dem\\/S-18NLA\\/S-18NLA_4.jpg"},{"sequence":"5","path":"http:\\/\\/www.es.id\\/media\\/dem\\/S-18NLA\\/S-18NLA_5.jpg"}]', '', '475 x 840 x 1080 cm', '770 x 285 x 540 cm', '', 0, 0, 0, 0, 1, '', '0000-00-00', '100', '10', '0000-00-00', '2016-11-07', 'XMA00281300000000', 'XMA0028130000000001', 1),
 (2, 13, 'S-12NLA', 'LG - AC - Split - 1.5 PK - Air Filter - Deep Sleep', 1, 1, 1, '6399000', '35', '0', '[{"sequence":"1","description":"teeeeeeeeeeeeeeeeeee"},{"sequence":"2","description":"No description Yet"},{"sequence":"3","description":"No description Yet"},{"sequence":"4","description":"No description Yet"}]', 'Dinginkan ruangan secara cepat dengan teknologi Jet Cool yang dapat menyejukkan ruangan dalam waktu 3 menit. Dengan filter udaranya, LG AC Split 1 1/2 PK mencegah bakteri dan debu menganggu waktu istirahat Sahabat ESer. Dilengkapi tombol Deep Sleep untuk mengatur temperatur ruangan secara otomatis dan membuat Sahabat ESer dapat tidur lebih nyenyak.', '[{"sequence":"1","path":"http:\\/\\/www.es.id\\/media\\/dem\\/S-12NLA\\/S-12NLA_1.jpg"},{"sequence":"2","path":"http:\\/\\/www.es.id\\/media\\/dem\\/S-12NLA\\/S-12NLA_2.jpg"},{"sequence":"3","path":"http:\\/\\/www.es.id\\/media\\/dem\\/S-12NLA\\/S-12NLA_3.jpg"},{"sequence":"4","path":"http:\\/\\/www.es.id\\/media\\/dem\\/S-12NLA\\/S-12NLA_4.jpg"},{"sequence":"5","path":"http:\\/\\/www.es.id\\/media\\/dem\\/S-12NLA\\/S-12NLA_5.jpg"}]', '[{"id":"1","value":"1 year"},{"id":"4","value":""},{"id":"6","value":""},{"id":"13","value":""},{"id":"20","value":""},{"id":"73","value":""},{"id":"74","value":""},{"id":"87","value":""},{"id":"98","value":""}]', '675 x 770 x 835 cm', '720 x 500 x 500 cm', '', 0, 0, 0, 0, 1, '', '0000-00-00', '100', '10', '0000-00-00', '2016-11-08', 'XHA00281300000004', 'XHA0028130000000401', 1);
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `oms_role`
+--
+
+CREATE TABLE `oms_role` (
+  `id` int(11) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `description` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `oms_role`
+--
+
+INSERT INTO `oms_role` (`id`, `name`, `description`) VALUES
+(6, 'Testing Role', 'DDDDD'),
+(7, 'Testing Role lagi', 'Tesstttt'),
+(8, 'Role ketiga', 'tesssttt'),
+(9, 'Ke empat broooo', 'Testtttt');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `oms_role_permission`
+--
+
+CREATE TABLE `oms_role_permission` (
+  `id` int(11) NOT NULL,
+  `role_id` int(11) NOT NULL,
+  `permission_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `oms_role_permission`
+--
+
+INSERT INTO `oms_role_permission` (`id`, `role_id`, `permission_id`) VALUES
+(13, 6, 2),
+(14, 6, 5),
+(15, 6, 8),
+(16, 7, 6),
+(17, 7, 7),
+(18, 7, 8),
+(19, 7, 14),
+(20, 7, 15),
+(21, 8, 4),
+(22, 8, 5),
+(23, 8, 17),
+(24, 8, 18),
+(25, 8, 19),
+(26, 9, 4),
+(27, 9, 5),
+(28, 9, 8),
+(29, 9, 15),
+(30, 9, 16);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `oms_role_user`
+--
+
+CREATE TABLE `oms_role_user` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `role_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `oms_role_user`
+--
+
+INSERT INTO `oms_role_user` (`id`, `user_id`, `role_id`) VALUES
+(6, 1, 7);
+
 --
 -- Indexes for dumped tables
 --
@@ -516,6 +630,12 @@ ALTER TABLE `oms_marketplace`
   ADD PRIMARY KEY (`marketplace_id`);
 
 --
+-- Indexes for table `oms_permission`
+--
+ALTER TABLE `oms_permission`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `oms_privilege`
 --
 ALTER TABLE `oms_privilege`
@@ -526,6 +646,24 @@ ALTER TABLE `oms_privilege`
 --
 ALTER TABLE `oms_product`
   ADD PRIMARY KEY (`product_id`);
+
+--
+-- Indexes for table `oms_role`
+--
+ALTER TABLE `oms_role`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `oms_role_permission`
+--
+ALTER TABLE `oms_role_permission`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `oms_role_user`
+--
+ALTER TABLE `oms_role_user`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -562,6 +700,11 @@ ALTER TABLE `oms_login`
 ALTER TABLE `oms_marketplace`
   MODIFY `marketplace_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
+-- AUTO_INCREMENT for table `oms_permission`
+--
+ALTER TABLE `oms_permission`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+--
 -- AUTO_INCREMENT for table `oms_privilege`
 --
 ALTER TABLE `oms_privilege`
@@ -571,6 +714,21 @@ ALTER TABLE `oms_privilege`
 --
 ALTER TABLE `oms_product`
   MODIFY `product_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT for table `oms_role`
+--
+ALTER TABLE `oms_role`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+--
+-- AUTO_INCREMENT for table `oms_role_permission`
+--
+ALTER TABLE `oms_role_permission`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+--
+-- AUTO_INCREMENT for table `oms_role_user`
+--
+ALTER TABLE `oms_role_user`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
