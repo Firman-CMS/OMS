@@ -3,6 +3,7 @@
 namespace Modules\Oms\Models;
 
 use DB;
+use Session;
 
 class Cms_model {
 
@@ -1459,5 +1460,10 @@ class Cms_model {
 
         DB::table($table)->where($primaryKey, '=', $ID)->update(['used' => $value,'used_at'=>date('y-m-d')]); 
         return true;
+    }
+    
+    public static function hasPermission($permission)
+    {
+        return in_array($permission, Session::get('permissions'));
     }
 }

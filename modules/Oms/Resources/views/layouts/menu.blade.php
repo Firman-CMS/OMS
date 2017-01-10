@@ -53,32 +53,37 @@
                 <i class="fa fa-angle-left pull-right"></i>
             </a>
             <ul class="treeview-menu">
+                @can('read_brand', $cms_model)
                 <li>
                     <a href="{{route('oms.brandMP')}}">
                         <i class="fa fa-database"></i> <span>Brand</span>
                     </a>
                 </li>
-                
+                @endcan
+                @can('read_color', $cms_model)
                 <li>
                     <a href="{{route('oms.colorMP')}}">
                         <i class="fa fa-database"></i> <span>Color</span>
                     </a>
                 </li>
-                
+                @endcan
+                @can('read_category', $cms_model)
                 <li>
                     <a href="{{route('oms.categoryMP')}}">
                         <i class="fa fa-database"></i> <span>Category</span>
                     </a>
                 </li>
-                
+                @endcan
+                @can('read_product', $cms_model)
                 <li>
                     <a href="{{route('oms.product')}}">
                         <i class="fa fa-database"></i> <span>Product</span>
                     </a>
                 </li>
+                @endcan
             </ul>            
         </li>
-        
+        @can('read_order', $cms_model)
         <li class="treeview">
             <a href="#">
                 <i class="fa fa-shopping-bag"></i> <span>Order List</span>
@@ -92,25 +97,28 @@
                 </li>
             </ul>            
         </li>
-          
+        @endcan
         <li class="treeview">
             <a href="#">
                 <i class="fa fa-cog"></i> <span>Configuration</span>
                 <i class="fa fa-angle-left pull-right"></i>
             </a>
             <ul class="treeview-menu">
+                @can('read_role', $cms_model)
                 <li><a href="{{route('oms.role')}}"><i class="fa fa-cog"></i> Role</a></li>
+                @endcan
                 <li>
                     <a href="{{route('oms.changepassword')}}">
                         <i class="fa fa-key"></i> <span>Change Password</span>
                     </a>
                 </li>
-
+                @can('read_user', $cms_model)
                 <li>
                     <a href="{{route('oms.userOMS')}}"><i class="fa fa-fw fa-user"></i>
                         <span> User</span>
                     </a>
                 </li>
+                @endcan
             </ul>            
         </li>
     </ul>

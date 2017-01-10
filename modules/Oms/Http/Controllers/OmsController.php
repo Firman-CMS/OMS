@@ -6,6 +6,7 @@ use Pingpong\Modules\Routing\Controller;
 use Illuminate\Http\Request;
 use Modules\Oms\Models\Cms_model;
 use Response;
+use Illuminate\View\View;
 
 class OmsController extends Controller {
 
@@ -69,4 +70,8 @@ class OmsController extends Controller {
         }
     }
     
+    public function compose(View $view)
+    {
+        $view->with('cms_model', Cms_model::class);
+    }
 }
