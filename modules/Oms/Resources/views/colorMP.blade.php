@@ -25,7 +25,9 @@
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
-                    <a href="{{route('oms.editColorMP')}}"><span class="icon24 glyphicon glyphicon-plus"></span></a>
+                    @if(policy($cms_model)->write_color())
+                        <a href="{{route('oms.editColorMP')}}"><span class="icon24 glyphicon glyphicon-plus"></span></a>
+                    @endif
                     @if(count($colorArray)>0)
 
                     <table id="tabledata" class="table table-bordered table-striped">
@@ -46,7 +48,11 @@
                                 <td>{{$colorArrayDetail->color_marketplace_desc}}</td>
                                 <td>{{$colorArrayDetail->marketplace_name}}</td>
                                 <td>
-                                    <a href="{!! route('oms.editColorMP').'/'.$colorArrayDetail->color_mapping_id !!}" title="edit"><span class="glyphicon glyphicon-edit"></span></a>
+                                    @if(policy($cms_model)->write_color())
+                                        <a href="{!! route('oms.editColorMP').'/'.$colorArrayDetail->color_mapping_id !!}" title="edit"><span class="glyphicon glyphicon-edit"></span></a>
+                                    @else
+                                        -
+                                    @endif
                                 </td>
                             </tr>
                             @endforeach

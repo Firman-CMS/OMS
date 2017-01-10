@@ -25,7 +25,9 @@
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
-                    <a href="{{route('oms.editCategoryMP')}}"><span class="icon24 glyphicon glyphicon-plus"></span></a>
+                    @if(policy($cms_model)->write_category())
+                        <a href="{{route('oms.editCategoryMP')}}"><span class="icon24 glyphicon glyphicon-plus"></span></a>
+                    @endif
                     @if(count($categoryArray)>0)
 
                     <table id="tabledata" class="table table-bordered table-striped">
@@ -47,7 +49,11 @@
                                 <td>{{$categoryArrayDetail->category_marketplace_desc}}</td>
                                 <td>{{$categoryArrayDetail->marketplace_name}}</td>
                                 <td>
-                                    <a href="{!! route('oms.editCategoryMP').'/'.$categoryArrayDetail->category_mapping_id !!}" title="edit"><span class="glyphicon glyphicon-edit"></span></a>
+                                    @if(policy($cms_model)->write_category())
+                                        <a href="{!! route('oms.editCategoryMP').'/'.$categoryArrayDetail->category_mapping_id !!}" title="edit"><span class="glyphicon glyphicon-edit"></span></a>
+                                    @else
+                                        -
+                                    @endif
                                 </td>
                             </tr>
                             @endforeach

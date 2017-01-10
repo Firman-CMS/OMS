@@ -25,7 +25,9 @@
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
-                    <a href="{{route('oms.editBrandMP')}}"><span class="icon24 glyphicon glyphicon-plus"></span></a>
+                    @if(policy($cms_model)->write_brand())
+                        <a href="{{route('oms.editBrandMP')}}"><span class="icon24 glyphicon glyphicon-plus"></span></a>
+                    @endif
                     @if(count($brandArray)>0)
 
                     <table id="tabledata" class="table table-bordered table-striped">
@@ -47,7 +49,11 @@
                                 <td>{{$brandArrayDetail->brand_marketplace_desc}}</td>
                                 <td>{{$brandArrayDetail->marketplace_name}}</td>
                                 <td>
-                                    <a href="{!! route('oms.editBrandMP').'/'.$brandArrayDetail->brand_mapping_id !!}" title="edit"><span class="glyphicon glyphicon-edit"></span></a>
+                                    @if(policy($cms_model)->write_brand())
+                                        <a href="{!! route('oms.editBrandMP').'/'.$brandArrayDetail->brand_mapping_id !!}" title="edit"><span class="glyphicon glyphicon-edit"></span></a>
+                                    @else
+                                        -
+                                    @endif
                                 </td>
                             </tr>
                             @endforeach

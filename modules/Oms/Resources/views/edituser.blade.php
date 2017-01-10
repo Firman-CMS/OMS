@@ -80,7 +80,7 @@
                     </div>
                     @endif
                     
-<!--                    {!! Form::hidden('privilege', $privilege , ['id' => 'privilege','class'=>'form-control add-top-margin'] ) !!}
+                    {!! Form::hidden('privilege', $privilege , ['id' => 'privilege','class'=>'form-control add-top-margin'] ) !!}
                     @if($session['category'] == "S")
                     <div class="form-group">              
                         <label>Privilege</label>
@@ -95,7 +95,7 @@
                             <option value="M" @if($privilege == "M") {{'selected'}} @endif >{{'Marketing'}}</option>
                         </select>                     
                     </div>
-                    @endif-->
+                    @endif
                     
                     <div class="form-group">              
                         <label>Nama</label>

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jan 09, 2017 at 12:11 AM
+-- Generation Time: Jan 10, 2017 at 04:05 PM
 -- Server version: 5.7.16-0ubuntu0.16.04.1
 -- PHP Version: 7.0.8-0ubuntu0.16.04.3
 
@@ -370,7 +370,7 @@ CREATE TABLE `oms_login` (
   `phone` varchar(100) DEFAULT NULL,
   `email` varchar(100) NOT NULL,
   `password` varchar(50) NOT NULL,
-  `category_code` varchar(1) NOT NULL,
+  `category_code` varchar(1) DEFAULT NULL,
   `active` int(1) NOT NULL DEFAULT '1',
   `birthday` date DEFAULT NULL,
   `createdon` date NOT NULL,
@@ -383,7 +383,8 @@ CREATE TABLE `oms_login` (
 --
 
 INSERT INTO `oms_login` (`user_id`, `name`, `address`, `hp`, `phone`, `email`, `password`, `category_code`, `active`, `birthday`, `createdon`, `isdelete`, `note`) VALUES
-(1, 'Yung Fei.', 'Jakarta', '08992369126', '08992369126', 'yungfei1989@gmail.com', '794885428ddb12e1b64e52fb6650de0e', '', 1, '1900-12-29', '0000-00-00', 0, '<p>tes<br></p>');
+(1, 'Yung Fei.', 'Jakarta', '08992369126', '08992369126', 'yungfei1989@gmail.com', '794885428ddb12e1b64e52fb6650de0e', '', 1, '1900-12-29', '0000-00-00', 0, '<p>tes<br></p>'),
+(2, 'Dwikky Maradhiza', 'Testing', '123123123', '123123123', 'dwikkymaradhiza@yahoo.com', '8f5670586880fc41fb66e930cf1c9fd7', NULL, 1, '2017-01-17', '0000-00-00', 0, '');
 
 -- --------------------------------------------------------
 
@@ -525,10 +526,8 @@ CREATE TABLE `oms_role` (
 --
 
 INSERT INTO `oms_role` (`id`, `name`, `description`) VALUES
-(6, 'Testing Role', 'DDDDD'),
-(7, 'Testing Role lagi', 'Tesstttt'),
-(8, 'Role ketiga', 'tesssttt'),
-(9, 'Ke empat broooo', 'Testtttt');
+(6, 'Superadmin Role', 'Superadmin Role'),
+(10, 'Admin Role', 'Admin Role');
 
 -- --------------------------------------------------------
 
@@ -547,24 +546,31 @@ CREATE TABLE `oms_role_permission` (
 --
 
 INSERT INTO `oms_role_permission` (`id`, `role_id`, `permission_id`) VALUES
-(13, 6, 2),
-(14, 6, 5),
-(15, 6, 8),
-(16, 7, 6),
-(17, 7, 7),
-(18, 7, 8),
-(19, 7, 14),
-(20, 7, 15),
-(21, 8, 4),
-(22, 8, 5),
-(23, 8, 17),
-(24, 8, 18),
-(25, 8, 19),
-(26, 9, 4),
-(27, 9, 5),
-(28, 9, 8),
-(29, 9, 15),
-(30, 9, 16);
+(50, 6, 1),
+(51, 6, 2),
+(52, 6, 3),
+(53, 6, 4),
+(54, 6, 5),
+(55, 6, 6),
+(56, 6, 7),
+(57, 6, 8),
+(58, 6, 9),
+(59, 6, 10),
+(60, 6, 11),
+(61, 6, 12),
+(62, 6, 13),
+(63, 6, 14),
+(64, 6, 15),
+(65, 6, 16),
+(66, 6, 17),
+(67, 6, 18),
+(68, 6, 19),
+(74, 10, 1),
+(75, 10, 4),
+(76, 10, 7),
+(77, 10, 10),
+(78, 10, 11),
+(79, 10, 13);
 
 -- --------------------------------------------------------
 
@@ -583,7 +589,8 @@ CREATE TABLE `oms_role_user` (
 --
 
 INSERT INTO `oms_role_user` (`id`, `user_id`, `role_id`) VALUES
-(6, 1, 7);
+(6, 1, 6),
+(9, 2, 10);
 
 --
 -- Indexes for dumped tables
@@ -693,7 +700,7 @@ ALTER TABLE `oms_invoice_status`
 -- AUTO_INCREMENT for table `oms_login`
 --
 ALTER TABLE `oms_login`
-  MODIFY `user_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `user_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `oms_marketplace`
 --
@@ -718,17 +725,17 @@ ALTER TABLE `oms_product`
 -- AUTO_INCREMENT for table `oms_role`
 --
 ALTER TABLE `oms_role`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT for table `oms_role_permission`
 --
 ALTER TABLE `oms_role_permission`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=80;
 --
 -- AUTO_INCREMENT for table `oms_role_user`
 --
 ALTER TABLE `oms_role_user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

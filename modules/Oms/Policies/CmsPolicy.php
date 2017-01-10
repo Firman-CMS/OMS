@@ -16,7 +16,9 @@ class CmsPolicy
     
     public function read_brand()
     {
-        return Cms_model::hasPermission('brand-read');
+        return Cms_model::hasPermission('brand-read') 
+                || Cms_model::hasPermission('brand-write')
+                || Cms_model::hasPermission('brand-delete');
     }
     
     public function delete_brand()
@@ -31,7 +33,9 @@ class CmsPolicy
     
     public function read_color()
     {
-        return Cms_model::hasPermission('color-read');
+        return Cms_model::hasPermission('color-read')
+                || Cms_model::hasPermission('color-write')
+                || Cms_model::hasPermission('color-delete');
     }
     
     public function delete_color()
@@ -46,7 +50,9 @@ class CmsPolicy
     
     public function read_category()
     {
-        return Cms_model::hasPermission('category-read');
+        return Cms_model::hasPermission('category-read')
+                || Cms_model::hasPermission('category-write')
+                || Cms_model::hasPermission('category-delete');
     }
     
     public function delete_category()
@@ -61,7 +67,9 @@ class CmsPolicy
     
     public function read_product()
     {
-        return Cms_model::hasPermission('product-read');
+        return Cms_model::hasPermission('product-read')
+                || Cms_model::hasPermission('product-write')
+                || Cms_model::hasPermission('product-delete');
     }
     
     public function delete_product()
@@ -76,7 +84,9 @@ class CmsPolicy
     
     public function read_role()
     {
-        return Cms_model::hasPermission('role-read');
+        return Cms_model::hasPermission('role-read')
+                || Cms_model::hasPermission('role-write')
+                || Cms_model::hasPermission('role-delete');
     }
     
     public function write_role()
@@ -91,7 +101,9 @@ class CmsPolicy
     
     public function read_user()
     {
-        return Cms_model::hasPermission('user-read');
+        return Cms_model::hasPermission('user-read')
+                || Cms_model::hasPermission('user-write')
+                || Cms_model::hasPermission('user-delete');
     }
     
     public function write_user()
