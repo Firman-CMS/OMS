@@ -1,11 +1,16 @@
 <?php
 
-Route::group(['middleware' => 'web', 'prefix' => 'oms', 'namespace' => 'Modules\Oms\Http\Controllers'], function()
-{
+//Public Routes
+Route::group(['middleware' => ['web'], 'prefix' => 'oms', 'namespace' => 'Modules\Oms\Http\Controllers'], function() {
     Route::get('/', ['as' => 'login.oms.form', 'uses' => 'OmsController@index']);
     Route::post('/loginsubmit', ['as' => 'login.oms.submit', 'uses' => 'OmsController@loginsubmit']);
     Route::get('/signout', ['as' => 'login.oms.signout', 'uses' => 'OmsController@signout']);            
     Route::get('/refresh/captcha', ['as' => 'login.oms.refreshCaptcha', 'uses' => 'OmsController@refreshCaptcha']);
+});
+
+//Admin Routes
+Route::group(['middleware' => ['web','authOms'], 'prefix' => 'oms', 'namespace' => 'Modules\Oms\Http\Controllers'], function()
+{
     
     /* dashboard*/
     Route::get('/dashboard', ['as' => 'oms.dashboard', 'uses' => 'DashboardController@dashboard']);

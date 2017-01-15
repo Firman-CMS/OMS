@@ -4,6 +4,7 @@ namespace Modules\Oms\Models;
 
 use DB;
 use Session;
+use Route;
 
 class Cms_model {
 
@@ -73,13 +74,30 @@ class Cms_model {
     }
     
     public static function getAllPermission() {
-        return DB::table('oms_permission')->select('id','name','description')->get();
+        $permissions = [];
+        foreach (Route::getRoutes()->getRoutes() as $route)
+        {
+            $action = $route->getAction();
+
+            if (array_key_exists('controller', $action))
+            {
+                $actionSplit = explode("@", $action['controller']);
+                $controller = str_replace("{$action['namespace']}\\", '', $actionSplit[0]);
+                $permissions[] = [
+                    'namespace' => $action['namespace'],
+                    'controller' => $controller,
+                    'method' => $actionSplit[1],
+                    'value' => $action['controller']
+                ];
+            }
+        }
+        
+        return $permissions;
     }
     
     public static function getAllSelectedPermission($role_id) {
         return DB::table('oms_role_permission')
-                ->select('oms_permission.id')
-                ->join('oms_permission', 'oms_permission.id', '=', 'oms_role_permission.permission_id')
+                ->select('oms_role_permission.permission')
                 ->where('oms_role_permission.role_id', $role_id)->get();
     }
     
@@ -94,7 +112,7 @@ class Cms_model {
         DB::table('oms_role_permission')->where('role_id', $id)->delete();
         
         foreach($data as $val) {
-            DB::insert('insert into oms_role_permission (role_id, permission_id) values (?, ?)', 
+            DB::insert('insert into oms_role_permission (role_id, permission) values (?, ?)', 
                     [
                         $id,                         
                         $val

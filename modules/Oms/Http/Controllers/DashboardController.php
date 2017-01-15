@@ -143,7 +143,7 @@ class DashboardController extends OmsController {
             ];
             
             $insertId = Cms_model::insertRole($data);
-            Cms_model::updatePermissions($insertId, $request->permissions);
+            Cms_model::updatePermissions($insertId, explode(',', $request->permissions));
         }else{
             $data = [
                 'id' => $request->id,
@@ -152,7 +152,7 @@ class DashboardController extends OmsController {
             ];
             
             Cms_model::updateRole($data);
-            Cms_model::updatePermissions($request->id, $request->permissions);
+            Cms_model::updatePermissions($request->id, explode(',', $request->permissions));
         }
         
         return \Redirect::to(route('oms.role'));
@@ -178,10 +178,10 @@ class DashboardController extends OmsController {
             $selectedPermission = Cms_model::getAllSelectedPermission($id);
             
             foreach($selectedPermission as $k => $v) {
-                $selected[] = $v->id;
+                $selected[] = $v->permission;
             }
         }
-   
+        
         return view('oms::editrole', compact('session', 'data', 'permissions', 'selected'));
     }
     

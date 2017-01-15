@@ -71,10 +71,6 @@
                         </div>                    
                     </div>
 
-
-
-                    @endif
-
                 </div>
                 <!-- /.box-body -->
             </div>

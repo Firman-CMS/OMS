@@ -64,16 +64,15 @@ class OmsController extends Controller {
         $permissions = [];
         
         $data = DB::table('oms_role_user')
-                ->select('oms_permission.name')
+                ->select('oms_role_permission.permission')
                 ->join('oms_role', 'oms_role.id', '=', 'oms_role_user.role_id')
                 ->join('oms_role_permission', 'oms_role.id', '=', 'oms_role_permission.role_id')
-                ->join('oms_permission', 'oms_permission.id', '=', 'oms_role_permission.permission_id')
                 ->where('oms_role_user.user_id', $user_id)
-                ->groupBy('oms_role_permission.permission_id')
+                ->groupBy('oms_role_permission.permission')
                 ->get();
         
         foreach ($data as $k => $v) {
-            $permissions[] = $v->name;
+            $permissions[] = $v->permission;
         }
         
         $request->session()->put('permissions', $permissions);
