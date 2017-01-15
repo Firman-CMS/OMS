@@ -7,7 +7,6 @@
     "order": 0,
     "providers": [
         "Modules\\Oms\\Providers\\OmsServiceProvider",
-        "Modules\\Oms\\Providers\\OmsAuthServiceProvider",
         "Modules\\Oms\\Providers\\OmsComposerServiceProvider"
     ],
     "aliases":{},

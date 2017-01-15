@@ -35,10 +35,6 @@ class DashboardController extends OmsController {
     }
 
     public function userPage() {
-        if (!policy(Cms_model::class)->read_user()) {
-            return response('Unauthorized.', 401);
-        }
-        
         $session = $this->session;
 
         $allUser = Cms_model::getAllUserLogin('', 0, false);
@@ -52,7 +48,7 @@ class DashboardController extends OmsController {
     }
     
     public function editUser($userID = '') {
-        if (!policy(Cms_model::class)->write_user()) {
+        if (true === false) {
             return response('Unauthorized.', 401);
         }
         
@@ -163,10 +159,6 @@ class DashboardController extends OmsController {
     }
     
     public function role() {
-        if (!policy(Cms_model::class)->read_role()) {
-            return response('Unauthorized.', 401);
-        }
-        
         $session = $this->session;
 
         $allRole = Cms_model::getAllRole();
@@ -176,10 +168,6 @@ class DashboardController extends OmsController {
     }
     
     public function editRole($id = '') {
-        if (!policy(Cms_model::class)->write_role()) {
-            return response('Unauthorized.', 401);
-        }
-        
         $session = $this->session;
         $data = [];
         $selected = [];
@@ -298,10 +286,6 @@ class DashboardController extends OmsController {
     }
     
     public function product() {
-        if (!policy(Cms_model::class)->read_product()) {
-            return response('Unauthorized.', 401);
-        }
-        
         $session = $this->session;
         $memberMerchant = array();
         $productType = array();
@@ -311,10 +295,6 @@ class DashboardController extends OmsController {
     }
     
     public function editProductMP($productID = '') {
-        if (!policy(Cms_model::class)->write_product()) {
-            return response('Unauthorized.', 401);
-        }
-        
         $session = $this->session;
         $productArray =[];
         $productArrays = Cms_model::getAllProduct($productID);
@@ -421,10 +401,6 @@ class DashboardController extends OmsController {
     }
     
     public function brandMP($page = '') {
-        if (!policy(Cms_model::class)->read_brand()) {
-            return response('Unauthorized.', 401);
-        }
-        
         $session = $this->session;
         $brandArray = [];
         $brandArray = Cms_model::getAllBrandMapping();        
@@ -433,10 +409,6 @@ class DashboardController extends OmsController {
     }
     
     public function colorMP($page = '') {
-        if (!policy(Cms_model::class)->read_color()) {
-            return response('Unauthorized.', 401);
-        }
-        
         $session = $this->session;
         $colorArray = [];
         $colorArray = Cms_model::getAllColorMapping();        
@@ -444,10 +416,6 @@ class DashboardController extends OmsController {
     }
     
     public function categoryMP($page = '') {
-        if (!policy(Cms_model::class)->read_category()) {
-            return response('Unauthorized.', 401);
-        }
-        
         $session = $this->session;
         $categoryArray = [];
         $categoryArray = Cms_model::getAllCategoryMapping();        
@@ -456,10 +424,6 @@ class DashboardController extends OmsController {
     }
     
     public function editBrandMP($brand = '') {
-        if (!policy(Cms_model::class)->write_brand()) {
-            return response('Unauthorized.', 401);
-        }
-        
         $session = $this->session;
         $brandResults = '';
         $brandArray = [];
@@ -473,10 +437,6 @@ class DashboardController extends OmsController {
     }
     
     public function editColorMP($color = '') {
-        if (!policy(Cms_model::class)->write_color()) {
-            return response('Unauthorized.', 401);
-        }
-        
         $session = $this->session;
         $colorResults = '';
         $colorArray = [];
@@ -490,10 +450,6 @@ class DashboardController extends OmsController {
     }
     
     public function editCategoryMP($category = '') {
-        if (!policy(Cms_model::class)->write_category()) {
-            return response('Unauthorized.', 401);
-        }
-        
         $session = $this->session;
         $categoryResults = '';
         $categoryArray = [];
@@ -780,10 +736,6 @@ class DashboardController extends OmsController {
     }
     
     public function orderList(){
-        if (!policy(Cms_model::class)->read_order()) {
-            return response('Unauthorized.', 401);
-        }
-        
         $session = $this->session; 
         $marketPlaceArray = Cms_model::getAllMarketPlace();
         

@@ -25,9 +25,7 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-                @if(policy($cms_model)->write_role())
-                    <a href="{{route('oms.editrole')}}"><span class="icon24 glyphicon glyphicon-plus"></span></a>
-                @endif
+                <a href="{{route('oms.editrole')}}"><span class="icon24 glyphicon glyphicon-plus"></span></a>
               <table id="configuration" class="table table-bordered table-striped">
                 <thead>
                 <tr>
@@ -40,12 +38,8 @@
                 <tr>
                   <td>{{$allRoleDetail->name}}</td>
                   <td>
-                    @if(policy($cms_model)->write_role())
-                            <a href="{{route('oms.editrole').'/'.$allRoleDetail->id}}" title="edit"><span class="glyphicon glyphicon-edit"></span></a>
-                    @endif
-                    @if(policy($cms_model)->delete_role())
+                        <a href="{{route('oms.editrole').'/'.$allRoleDetail->id}}" title="edit"><span class="glyphicon glyphicon-edit"></span></a>
                       <a onclick="return window.confirm('Are you sure you want to remove this data?')" href="{{route('oms.deleterole', $allRoleDetail->id)}}" title="edit"><span class="glyphicon glyphicon-trash"></span></a>
-                    @endif
                   </td>
                 </tr>
                 @endforeach

@@ -25,10 +25,7 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-                @if(policy($cms_model)->write_product())
-                    <a href="{{route('oms.productES')}}"><span class="icon24 glyphicon glyphicon-plus"></span></a>
-                @endif
-
+                <a href="{{route('oms.productES')}}"><span class="icon24 glyphicon glyphicon-plus"></span></a>
                     <table id="configuration" class="table table-bordered table-striped">
                         <thead>
                             <tr>
@@ -53,12 +50,8 @@
                                 <td>{{$productArrayDetail->product_name}}</td>
                                 <td>{{$productArrayDetail->marketplace_name}}</td>
                                 <td>
-                                    @if(policy($cms_model)->write_product())
-                                        <a href="{!! route('oms.editProductMP').'/'.$productArrayDetail->product_id !!}" title="edit"><span class="glyphicon glyphicon-edit"></span></a>
-                                    @endif
-                                    @if(policy($cms_model)->delete_product())
-                                        <a href="#" title="delete" onclick="deleteProduct('{{json_encode($productParam)}}','{{route("oms.deleteProduct")}}'); return false;"><span class="glyphicon glyphicon-trash"></span></a>
-                                    @endif
+                                    <a href="{!! route('oms.editProductMP').'/'.$productArrayDetail->product_id !!}" title="edit"><span class="glyphicon glyphicon-edit"></span></a>
+                                    <a href="#" title="delete" onclick="deleteProduct('{{json_encode($productParam)}}','{{route("oms.deleteProduct")}}'); return false;"><span class="glyphicon glyphicon-trash"></span></a>
                                 </td>
                             </tr>
                             @endforeach

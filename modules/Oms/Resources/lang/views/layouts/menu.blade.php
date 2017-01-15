@@ -53,37 +53,28 @@
                 <i class="fa fa-angle-left pull-right"></i>
             </a>
             <ul class="treeview-menu">
-                @if(policy($cms_model)->read_brand())
                 <li>
                     <a href="{{route('oms.brandMP')}}">
                         <i class="fa fa-database"></i> <span>Brand</span>
                     </a>
                 </li>
-                @endif
-                @if(policy($cms_model)->read_color())
                 <li>
                     <a href="{{route('oms.colorMP')}}">
                         <i class="fa fa-database"></i> <span>Color</span>
                     </a>
                 </li>
-                @endif
-                @if(policy($cms_model)->read_category())
                 <li>
                     <a href="{{route('oms.categoryMP')}}">
                         <i class="fa fa-database"></i> <span>Category</span>
                     </a>
                 </li>
-                @endif
-                @if(policy($cms_model)->read_product())
                 <li>
                     <a href="{{route('oms.product')}}">
                         <i class="fa fa-database"></i> <span>Product</span>
                     </a>
                 </li>
-                @endif
             </ul>            
         </li>
-        @if(policy($cms_model)->read_order())
         <li class="treeview">
             <a href="#">
                 <i class="fa fa-shopping-bag"></i> <span>Order List</span>
@@ -97,28 +88,23 @@
                 </li>
             </ul>            
         </li>
-        @endif
         <li class="treeview">
             <a href="#">
                 <i class="fa fa-cog"></i> <span>Configuration</span>
                 <i class="fa fa-angle-left pull-right"></i>
             </a>
             <ul class="treeview-menu">
-                @if(policy($cms_model)->read_role())
                 <li><a href="{{route('oms.role')}}"><i class="fa fa-cog"></i> Role</a></li>
-                @endif
                 <li>
                     <a href="{{route('oms.changepassword')}}">
                         <i class="fa fa-key"></i> <span>Change Password</span>
                     </a>
                 </li>
-                @if(policy($cms_model)->read_user())
                 <li>
                     <a href="{{route('oms.userOMS')}}"><i class="fa fa-fw fa-user"></i>
                         <span> User</span>
                     </a>
                 </li>
-                @endif
             </ul>            
         </li>
     </ul>

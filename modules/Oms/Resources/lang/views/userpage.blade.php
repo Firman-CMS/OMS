@@ -25,13 +25,11 @@
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
-                    @if(policy($cms_model)->write_user())
                     <div class="row">
                         <div class="col-xs-4">
                             <p><a href="{{route('oms.editUser')}}"><span class="icon24 glyphicon glyphicon-plus"></span></a></p>                            
                         </div>
                     </div>
-                    @endif
                     <table id="configuration" class="table table-bordered table-striped">
                         <thead>
                             <tr>
@@ -55,20 +53,16 @@
                                 </td>
 
                                 <td>
-                                    @if(policy($cms_model)->write_user())
-                                        <a href="{{route('oms.editUser').'/'.$allUserDetail->user_id}}" title="edit"><span class="glyphicon glyphicon-edit"></span></a>
                                         @if($allUserDetail->active=="1")
                                         <a href="#" title="deactive" onclick="deactive('{{$allUserDetail->user_id}}', '{{"user_id"}}', '{{"oms_user"}}','{{route('oms.deactiveitem')}}'); return false;"><span class="glyphicon glyphicon-remove"></span></a>
                                         @else
                                         <a href="#" title="active" onclick="active('{{$allUserDetail->user_id}}', '{{"id"}}', '{{"oms_user"}}','{{route("oms.deactiveitem")}}'); return false;"><span class="glyphicon glyphicon-ok"></span></a>
                                         @endif
                                         @if($session['category'] === "S")
+                                        <a href="{{route('oms.editUser').'/'.$allUserDetail->user_id}}" title="edit"><span class="glyphicon glyphicon-edit"></span></a>
                                         <a href="{{route('oms.changepassword').'/'.$allUserDetail->user_id.'/member'}}"><i class="fa fa-key"></i></a>
-                                        @endif
-                                    @endif
-                                    @if(policy($cms_model)->delete_user())
                                         <a href="#" title="delete" onclick="deleteData('{{$allUserDetail->user_id}}', '{{"id"}}', '{{"oms_user"}}','{{route("oms.deleteitem")}}'); return false;"><span class="glyphicon glyphicon-trash"></span></a>
-                                    @endif
+                                        @endif
                                 </td>
 
                             </tr>
