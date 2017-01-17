@@ -148,6 +148,39 @@ class ESConnectedController extends OmsController {
         return json_encode($response);
     }
     
+    public function getESCategory($limit = '', $page = '', $categoryName = '') {
+        if ($limit === "") {
+            $limit = 10;
+        }
+        $param = 'limit=' . $limit;
+
+        if ($page === "") {
+            $page = 0;
+        }
+        $param = 'page=' . $page;
+
+        if ($categoryName !== "") {
+            $param .= '&category=' . $categoryName;
+        }
+
+
+        $service_url = 'http://dem.es.id/apiv1/product/category?' . $param;
+
+        $curl = curl_init($service_url);
+        curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
+        curl_setopt($curl, CURLOPT_USERPWD, "es:escom"); //Your credentials goes here
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($curl, CURLOPT_POST, true);
+        curl_setopt($curl, CURLOPT_POSTFIELDS, '');
+        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false); //IMP if the url has https and you don't want to verify source certificate
+
+        $curl_response = curl_exec($curl);
+        $response = json_decode($curl_response);
+        curl_close($curl);
+
+        return json_encode($response);
+    }
+    
     public function getESColor($limit = '', $page = '', $colorName = '') {
         if ($limit === "") {
             $limit = 10;
@@ -333,7 +366,13 @@ class ESConnectedController extends OmsController {
     
     /* category ES */
     public function categoryES($page = ''){
+        $session = $this->session;
+        $webPage = isset($page) ? $page : 0;
+        $categoryArray = $this->getESCategory(20, $webPage);
+
+        dd($categoryArray);
         
+        return view('oms::colorES', compact('session', 'colorArray'));
     }
     
     public function editCategoryES($category = '') {

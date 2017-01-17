@@ -40,8 +40,8 @@
                     {{--*/ $n = 1; /*--}}
                     @foreach ($attributesArray as $attributesArrayDetail)
                     <div class="form-group">              
-                        <label>{{$attributesArrayDetail->Attribute}}</label>
-                        {!! Form::text('attributes', isset($attributSelected[$attributesArrayDetail->Id])?$attributSelected[$attributesArrayDetail->Id]:"" , ['id' =>'' ,'class'=>'form-control add-top-margin', 'placeholder'=>'', 'data-id'=>$attributesArrayDetail->Id ] ) !!}                        
+                        <label>{{$attributesArrayDetail->attribute}}</label>
+                        {!! Form::text('attributes', isset($attributSelected[$attributesArrayDetail->id])?$attributSelected[$attributesArrayDetail->id]:"" , ['id' =>'' ,'class'=>'form-control add-top-margin', 'placeholder'=>'', 'data-id'=>$attributesArrayDetail->id ] ) !!}                        
                     </div>
                     {{--*/ $n += 1; /*--}}
                     @endforeach

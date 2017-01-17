@@ -95,7 +95,6 @@ Route::group(['middleware' => 'web', 'prefix' => 'oms', 'namespace' => 'Modules\
     Route::get('/listColor/{marketplace?}', ['as' => 'oms.listcolor', 'uses' => 'DashboardController@listColor']);
     Route::get('/listBrand/{marketplace?}', ['as' => 'oms.listbrand', 'uses' => 'DashboardController@listBrand']);
     Route::get('/listCategory/{marketplace?}', ['as' => 'oms.listcategory', 'uses' => 'DashboardController@listCategory']);
-    Route::get('/listAttributes/{categoryID?}/{marketplace?}/{attributes?}', ['as' => 'oms.listattributes', 'uses' => 'DashboardController@listAttributes']);
     
     /* MP modals */
     Route::post('/getAllMPColorModals', ['as' => 'oms.getAllMPColorModals', 'uses' => 'DashboardController@listColorMPModals']);

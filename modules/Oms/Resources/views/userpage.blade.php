@@ -57,9 +57,9 @@
                                     @if($allUserDetail->active=="1")
                                     <a href="#" title="deactive" onclick="deactive('{{$allUserDetail->user_id}}', '{{"user_id"}}', '{{"oms_user"}}','{{route('oms.deactiveitem')}}'); return false;"><span class="glyphicon glyphicon-remove"></span></a>
                                     @else
-                                    <a href="#" title="active" onclick="active('{{$allUserDetail->user_id}}', '{{"id"}}', '{{"oms_user"}}','{{route("cms.deactiveitem")}}'); return false;"><span class="glyphicon glyphicon-ok"></span></a>
+                                    <a href="#" title="active" onclick="active('{{$allUserDetail->user_id}}', '{{"id"}}', '{{"oms_user"}}','{{route("oms.deactiveitem")}}'); return false;"><span class="glyphicon glyphicon-ok"></span></a>
                                     @endif
-                                    <a href="#" title="delete" onclick="deleteData('{{$allUserDetail->user_id}}', '{{"id"}}', '{{"oms_user"}}','{{route("cms.deleteitem")}}'); return false;"><span class="glyphicon glyphicon-trash"></span></a>
+                                    <a href="#" title="delete" onclick="deleteData('{{$allUserDetail->user_id}}', '{{"id"}}', '{{"oms_user"}}','{{route("oms.deleteitem")}}'); return false;"><span class="glyphicon glyphicon-trash"></span></a>
                                     @if($session['category'] === "S")
                                     <a href="{{route('oms.changepassword').'/'.$allUserDetail->user_id.'/member'}}"><i class="fa fa-key"></i></a>
                                     @endif
