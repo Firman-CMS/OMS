@@ -79,7 +79,7 @@ class Cms_model {
         {
             $action = $route->getAction();
 
-            if (array_key_exists('controller', $action))
+            if (array_key_exists('controller', $action) && $action['namespace'] === "Modules\Oms\Http\Controllers")
             {
                 $actionSplit = explode("@", $action['controller']);
                 $controller = str_replace("{$action['namespace']}\\", '', $actionSplit[0]);

@@ -175,7 +175,6 @@ $(document).on('ready', function(){
                     '<tr>' +
                     '<th width="20%">Code</th>'+
                     '<th width="40%">Category</th>' +
-                    '<th width="20%">Commision</th>' +
                     '<th width="10%">Level</th>' +
                     '<th width="10%">Action</th>' +
                     '</tr>' +
@@ -185,7 +184,6 @@ $(document).on('ready', function(){
             table += '<tr>' +
                     '<td>' + result[index]['code'] + '</td>' +
                     '<td>' + result[index]['category'] + '</td>' +
-                    '<td>' + result[index]['commision'] + '</td>' +
                     '<td>' + result[index]['level'] + '</td>' +
                     '<td>' +
                     '<button \n\
@@ -200,7 +198,6 @@ $(document).on('ready', function(){
                     '<tr>' +
                     '<th width="20%">Code</th>'+
                     '<th width="40%">Category</th>' +
-                    '<th width="20%">Commision</th>' +
                     '<th width="10%">Level</th>' +
                     '<th width="10%">Action</th>' +
                     '</tr>' +

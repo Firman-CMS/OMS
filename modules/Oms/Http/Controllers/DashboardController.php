@@ -537,9 +537,15 @@ class DashboardController extends OmsController {
         $brandArray = '';
         
         $marketPlace = $request->brandMarketplace;
-                
+        
+        $param = [
+            'limit' => isset($request->limit)?$request->limit:'',
+            'q' => isset($request->q)?$request->q:'',
+            'page' => isset($request->page)?$request->page:'',
+        ];
+        
         if($marketPlace == 1 || $marketPlace == ''){
-            $brandArray = MMConnectedController::getMMBrand();
+            $brandArray = MMConnectedController::getMMBrand($param);
         }
         return $brandArray;
     }
