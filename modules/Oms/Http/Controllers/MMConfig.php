@@ -6,7 +6,7 @@ class MMConfig
 {
     protected $config;
     protected $defaultEnv = 'sandbox';
-    protected $timeout = 5;
+    protected $timeout = 20;
     protected $decodeAsArray = false;
 
     /**
@@ -16,7 +16,7 @@ class MMConfig
      */
     public function setEnv($env = null)
     {
-        $defaultConfig = \Config::get('global');;
+        $defaultConfig = \Config::get('global');
 
         if (empty($defaultConfig[$env])) {
             $this->config = $defaultConfig[$this->defaultEnv];

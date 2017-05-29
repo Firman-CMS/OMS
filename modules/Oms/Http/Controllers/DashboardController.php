@@ -12,6 +12,7 @@ use Crypt,Mail;
 use Modules\Oms\Http\Controllers\Mataharimall as Mataharimall;
 use Modules\Oms\Http\Controllers\MMConnectedController;
 use Modules\Oms\Http\Controllers\ESConnectedController;
+use Validator as Validate;
 
 class DashboardController extends OmsController {
 
@@ -47,18 +48,30 @@ class DashboardController extends OmsController {
     }
     
     public function editUser($userID = '') {
+        if (true === false) {
+            return response('Unauthorized.', 401);
+        }
+        
         $session = $this->session;
         $loginArray = array();
         $userArray = array();
+        $selected = [];
+        $roles = Cms_model::getAllRole();
 
         if ($userID !== "") {
             $loginArray = Cms_model::getAllUserLogin($userID);
             $userArray = $loginArray[0];
+            
+            $selectedRole = Cms_model::getAllSelectedRole($userID);
+            
+            foreach($selectedRole as $k => $v) {
+                $selected[] = $v->role_id;
+            }
         }
    
         $allPrivilege = Cms_model::getAllPrivilege();
         
-        return view('oms::edituser', compact('session', 'userArray','allPrivilege'));
+        return view('oms::edituser', compact('session', 'userArray','allPrivilege', 'roles', 'selected'));
     }
     
     public function savePrivilege(Request $request) {
@@ -113,6 +126,71 @@ class DashboardController extends OmsController {
         return view('oms::editprivilege', compact('session', 'privilege'));
     }
     
+    public function saveRole(Request $request) {
+        $validator = Validate::make($request->all(), [
+            'name' => 'required',
+            'permissions' => 'required',
+        ]);
+        
+        if($validator->fails()) {
+            return redirect()->back()->withErrors($validator);
+        }
+        
+        if($request->id === ''){
+            $data = [
+                'name' => $request->name,
+                'description' => $request->description,
+            ];
+            
+            $insertId = Cms_model::insertRole($data);
+            Cms_model::updatePermissions($insertId, explode(',', $request->permissions));
+        }else{
+            $data = [
+                'id' => $request->id,
+                'name' => $request->name,
+                'description' => $request->description,
+            ];
+            
+            Cms_model::updateRole($data);
+            Cms_model::updatePermissions($request->id, explode(',', $request->permissions));
+        }
+        
+        return \Redirect::to(route('oms.role'));
+    }
+    
+    public function role() {
+        $session = $this->session;
+
+        $allRole = Cms_model::getAllRole();
+        
+        
+        return view('oms::role', compact('session', 'allRole'));
+    }
+    
+    public function editRole($id = '') {
+        $session = $this->session;
+        $data = [];
+        $selected = [];
+        $permissions = Cms_model::getAllPermission();
+        
+        if ($id !== "") {
+            $data = Cms_model::getAllRole($id);
+            $selectedPermission = Cms_model::getAllSelectedPermission($id);
+            
+            foreach($selectedPermission as $k => $v) {
+                $selected[] = $v->permission;
+            }
+        }
+        
+        return view('oms::editrole', compact('session', 'data', 'permissions', 'selected'));
+    }
+    
+    public function deleteRole($id) {
+        Cms_model::deleteRole($id);
+   
+        return \Redirect::to(route('oms.role'));
+    }
+    
     public function saveUser(Request $request) {
         $session = $request->session()->all();
         $email = $request->email;
@@ -127,6 +205,7 @@ class DashboardController extends OmsController {
         $address = $request->address;
         $birthdate = $request->birthdate;
         $note = $request->note;
+        $roles = $request->roles;
         
         if($newPrivilege !== ""){
             $privilege = $newPrivilege;
@@ -157,7 +236,9 @@ class DashboardController extends OmsController {
             'note' => $note
         ];
 
-            Cms_model::insertUser($userArray);
+            $insertId = Cms_model::insertUser($userArray);
+            Cms_model::updateUserRole($insertId, $roles);
+            
             return \Redirect::to(route('oms.userOMS'));
         }else{
             $userArray = [
@@ -171,6 +252,8 @@ class DashboardController extends OmsController {
                 'note' => $note
             ];
             Cms_model::updateUser($userArray);
+            Cms_model::updateUserRole($userID, $roles);
+            
             return \Redirect::to(route('oms.userOMS'));
         }
     }
@@ -454,9 +537,15 @@ class DashboardController extends OmsController {
         $brandArray = '';
         
         $marketPlace = $request->brandMarketplace;
-                
+        
+        $param = [
+            'limit' => isset($request->limit)?$request->limit:'',
+            'q' => isset($request->q)?$request->q:'',
+            'page' => isset($request->page)?$request->page:'',
+        ];
+        
         if($marketPlace == 1 || $marketPlace == ''){
-            $brandArray = MMConnectedController::getMMBrand();
+            $brandArray = MMConnectedController::getMMBrand($param);
         }
         return $brandArray;
     }

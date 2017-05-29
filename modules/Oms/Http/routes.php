@@ -1,11 +1,16 @@
 <?php
 
-Route::group(['middleware' => 'web', 'prefix' => 'oms', 'namespace' => 'Modules\Oms\Http\Controllers'], function()
-{
+//Public Routes
+Route::group(['middleware' => ['web'], 'prefix' => 'oms', 'namespace' => 'Modules\Oms\Http\Controllers'], function() {
     Route::get('/', ['as' => 'login.oms.form', 'uses' => 'OmsController@index']);
     Route::post('/loginsubmit', ['as' => 'login.oms.submit', 'uses' => 'OmsController@loginsubmit']);
     Route::get('/signout', ['as' => 'login.oms.signout', 'uses' => 'OmsController@signout']);            
     Route::get('/refresh/captcha', ['as' => 'login.oms.refreshCaptcha', 'uses' => 'OmsController@refreshCaptcha']);
+});
+
+//Admin Routes
+Route::group(['middleware' => ['web','authOms'], 'prefix' => 'oms', 'namespace' => 'Modules\Oms\Http\Controllers'], function()
+{
     
     /* dashboard*/
     Route::get('/dashboard', ['as' => 'oms.dashboard', 'uses' => 'DashboardController@dashboard']);
@@ -68,6 +73,12 @@ Route::group(['middleware' => 'web', 'prefix' => 'oms', 'namespace' => 'Modules\
     Route::get('/privilege', ['as' => 'oms.privilege', 'uses' => 'DashboardController@privilege']);
     Route::get('/editprivilege/{ID?}', ['as' => 'oms.editprivilege', 'uses' => 'DashboardController@editprivilege']);
     Route::post('/saveprivilege', ['as' => 'oms.savePrivilege', 'uses' => 'DashboardController@savePrivilege']);
+    
+    /* role */
+    Route::get('/role', ['as' => 'oms.role', 'uses' => 'DashboardController@role']);
+    Route::get('/editrole/{ID?}', ['as' => 'oms.editrole', 'uses' => 'DashboardController@editRole']);
+    Route::post('/saverole', ['as' => 'oms.saveRole', 'uses' => 'DashboardController@saveRole']);
+    Route::get('/deleterole/{id}', ['as' => 'oms.deleterole', 'uses' => 'DashboardController@deleteRole']);
     
     /* API MM */
     Route::get('/getMMBrand/{string?}', ['as' => 'oms.getMMBrand', 'uses' => 'MMConnectedController@getMMBrand']);

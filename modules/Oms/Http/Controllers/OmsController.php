@@ -6,6 +6,8 @@ use Pingpong\Modules\Routing\Controller;
 use Illuminate\Http\Request;
 use Modules\Oms\Models\Cms_model;
 use Response;
+use Illuminate\View\View;
+use DB;
 
 class OmsController extends Controller {
 
@@ -50,13 +52,33 @@ class OmsController extends Controller {
         $request->session()->put('name', $loginUser[0]->name);
         $request->session()->put('category', $loginUser[0]->category_code);
         $request->session()->put('categoryDescription', $loginUser[0]->privilege_name);
+        $this->setPermission($request, $loginUser[0]->user_id);
 
         $joinDate = substr($loginUser[0]->createdon,8,2).'/'.substr($loginUser[0]->createdon,5,2).'/'.substr($loginUser[0]->createdon,0,4);
         $request->session()->put('joinDate', $joinDate);
         return redirect(route('oms.dashboard'));
     }
     
-    
+    protected function setPermission(Request $request, $user_id)
+    {
+        $permissions = [];
+        
+        $data = DB::table('oms_role_user')
+                ->select('oms_role_permission.permission')
+                ->join('oms_role', 'oms_role.id', '=', 'oms_role_user.role_id')
+                ->join('oms_role_permission', 'oms_role.id', '=', 'oms_role_permission.role_id')
+                ->where('oms_role_user.user_id', $user_id)
+                ->groupBy('oms_role_permission.permission')
+                ->get();
+        
+        foreach ($data as $k => $v) {
+            $permissions[] = $v->permission;
+        }
+        
+        $request->session()->put('permissions', $permissions);
+    }
+
+
     /**
      * Refresh captcha on click
      * @param Request $request
@@ -69,4 +91,8 @@ class OmsController extends Controller {
         }
     }
     
+    public function compose(View $view)
+    {
+        $view->with('cms_model', Cms_model::class);
+    }
 }

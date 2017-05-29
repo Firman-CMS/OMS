@@ -26,8 +26,6 @@
                 <!-- /.box-header -->
                 <div class="box-body">
                     <a href="{{route('oms.editBrandMP')}}"><span class="icon24 glyphicon glyphicon-plus"></span></a>
-                    @if(count($brandArray)>0)
-
                     <table id="tabledata" class="table table-bordered table-striped">
                         <thead>
                             <tr>
@@ -72,10 +70,6 @@
                             </form>
                         </div>                    
                     </div>
-
-
-
-                    @endif
 
                 </div>
                 <!-- /.box-body -->

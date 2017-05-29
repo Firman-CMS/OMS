@@ -17,18 +17,20 @@ class MMConnectedController extends OmsController {
 
     public function __construct(Request $request) {
         $this->session = $request->session()->all();
-
         if (!session()->has('userID')) {
             $this->middleware('authOms', ['except' => 'getLogout']);
         }
     }
     
     public static function getMMBrand($string='') {
-        $MM = new Mataharimall('430cbaad0c7c3653bd7a1da0c6258261', 'sandbox');
+        $defaultConfig = \Config::get('global');
+        $MM = new Mataharimall($defaultConfig['mataharimall_key'], 'sandbox');
         $parameter = [
-            'sortby' => 'brand',
-            'order' => 'asc',
-            'limit' => '15000'
+            "sortby" => "brand",
+            "order" => "asc",
+            "limit" => $string['limit'],
+            "q" => $string['q'],
+            "page" => $string['page'],
         ];
 
         try {
@@ -40,7 +42,6 @@ class MMConnectedController extends OmsController {
         $response = $MM->getResponseBody();
         if ($MM->getResponseCode() == 200 && !empty($response)) {
             return json_encode($response);
-
         } else {
             return json_encode($response);
         }
@@ -48,7 +49,8 @@ class MMConnectedController extends OmsController {
 
     
     public static function getMMCategory($string='') {
-        $MM = new Mataharimall('430cbaad0c7c3653bd7a1da0c6258261', 'sandbox');
+        $defaultConfig = \Config::get('global');
+        $MM = new Mataharimall($defaultConfig['mataharimall_key'], 'sandbox');
         $parameter = [
             "sortby" => "category",
             "order" => "asc",
@@ -73,7 +75,8 @@ class MMConnectedController extends OmsController {
     }
 
     public static function getMMAttributes($categoryID='') {
-        $MM = new Mataharimall('430cbaad0c7c3653bd7a1da0c6258261', 'sandbox');
+        $defaultConfig = \Config::get('global');
+        $MM = new Mataharimall($defaultConfig['mataharimall_key'], 'sandbox');
         $parameter = [
             "category_id" => $categoryID
         ];
@@ -85,7 +88,7 @@ class MMConnectedController extends OmsController {
         }
 
         $response = $MM->getResponseBody();
-        
+        dd($response);
         if ($MM->getResponseCode() == 200 && !empty($response)) {
             return json_encode($response);
 
@@ -95,11 +98,13 @@ class MMConnectedController extends OmsController {
     }
     
     public static function getMMColor($string='') {
-        $MM = new Mataharimall('430cbaad0c7c3653bd7a1da0c6258261', 'sandbox');
+        $defaultConfig = \Config::get('global');        
+        $MM = new Mataharimall($defaultConfig['mataharimall_key'], 'sandbox');
         $parameter = [
-            'sortby' => 'color',
-            'order' => 'asc',
-            'limit' => '100'
+            "sortby" => "color",
+            "order" => "asc",
+            "limit" => "100",
+            "page" => "1",
         ];
 
         try {
@@ -119,7 +124,8 @@ class MMConnectedController extends OmsController {
     
     
     public function deleteMMProduct($param = '') {
-        $MM = new Mataharimall('430cbaad0c7c3653bd7a1da0c6258261', 'sandbox');
+        $defaultConfig = \Config::get('global');        
+        $MM = new Mataharimall($defaultConfig['mataharimall_key'], 'sandbox');
         $parameter = $param;
 
         try {
@@ -218,7 +224,8 @@ class MMConnectedController extends OmsController {
     }
     
     public function insertMMProduct($productParam=[]) {
-        $MM = new Mataharimall('430cbaad0c7c3653bd7a1da0c6258261', 'sandbox');
+        $defaultConfig = \Config::get('global');        
+        $MM = new Mataharimall($defaultConfig['mataharimall_key'], 'sandbox');
         $parameter = $productParam;
 
         try {
@@ -236,7 +243,8 @@ class MMConnectedController extends OmsController {
     }
     
     public function updateMMProduct($productParam=[]) {
-        $MM = new Mataharimall('430cbaad0c7c3653bd7a1da0c6258261', 'sandbox');
+        $defaultConfig = \Config::get('global');        
+        $MM = new Mataharimall($defaultConfig['mataharimall_key'], 'sandbox');
         $parameter = $productParam;
 
         try {
@@ -256,7 +264,8 @@ class MMConnectedController extends OmsController {
     
   
     public function getOrderListMM($orderParameter) {
-        $MM = new Mataharimall('430cbaad0c7c3653bd7a1da0c6258261', 'sandbox');
+        $defaultConfig = \Config::get('global');
+        $MM = new Mataharimall($defaultConfig['mataharimall_key'], 'sandbox');
         $parameter = $orderParameter;
 
         try {
@@ -275,7 +284,8 @@ class MMConnectedController extends OmsController {
     }
     
     public function updateMMInvoiceStatus($statusParam=[]) {
-        $MM = new Mataharimall('430cbaad0c7c3653bd7a1da0c6258261', 'sandbox');
+        $defaultConfig = \Config::get('global');
+        $MM = new Mataharimall($defaultConfig['mataharimall_key'], 'sandbox');
         $parameter = [
             [
                 "so_store_number" => $statusParam['soStoreNumber'],

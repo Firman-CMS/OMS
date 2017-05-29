@@ -58,19 +58,16 @@
                         <i class="fa fa-database"></i> <span>Brand</span>
                     </a>
                 </li>
-                
                 <li>
                     <a href="{{route('oms.colorMP')}}">
                         <i class="fa fa-database"></i> <span>Color</span>
                     </a>
                 </li>
-                
                 <li>
                     <a href="{{route('oms.categoryMP')}}">
                         <i class="fa fa-database"></i> <span>Category</span>
                     </a>
                 </li>
-                
                 <li>
                     <a href="{{route('oms.product')}}">
                         <i class="fa fa-database"></i> <span>Product</span>
@@ -78,7 +75,6 @@
                 </li>
             </ul>            
         </li>
-        
         <li class="treeview">
             <a href="#">
                 <i class="fa fa-shopping-bag"></i> <span>Order List</span>
@@ -92,20 +88,18 @@
                 </li>
             </ul>            
         </li>
-          
         <li class="treeview">
             <a href="#">
                 <i class="fa fa-cog"></i> <span>Configuration</span>
                 <i class="fa fa-angle-left pull-right"></i>
             </a>
             <ul class="treeview-menu">
-                <li><a href="{{route('oms.privilege')}}"><i class="fa fa-cog"></i> Privilege</a></li>
+                <li><a href="{{route('oms.role')}}"><i class="fa fa-cog"></i> Role</a></li>
                 <li>
                     <a href="{{route('oms.changepassword')}}">
                         <i class="fa fa-key"></i> <span>Change Password</span>
                     </a>
                 </li>
-
                 <li>
                     <a href="{{route('oms.userOMS')}}"><i class="fa fa-fw fa-user"></i>
                         <span> User</span>

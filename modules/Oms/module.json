@@ -6,7 +6,8 @@
     "active": 1,
     "order": 0,
     "providers": [
-        "Modules\\Oms\\Providers\\OmsServiceProvider"
+        "Modules\\Oms\\Providers\\OmsServiceProvider",
+        "Modules\\Oms\\Providers\\OmsComposerServiceProvider"
     ],
     "aliases":{},
     "files": [

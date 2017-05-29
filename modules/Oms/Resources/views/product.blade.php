@@ -26,7 +26,6 @@
             <!-- /.box-header -->
             <div class="box-body">
                 <a href="{{route('oms.productES')}}"><span class="icon24 glyphicon glyphicon-plus"></span></a>
-
                     <table id="configuration" class="table table-bordered table-striped">
                         <thead>
                             <tr>

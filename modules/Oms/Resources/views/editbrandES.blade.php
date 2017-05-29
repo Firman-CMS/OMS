@@ -99,6 +99,7 @@
 <!-- /.content -->
 
 <script>
+    var max_MP_page;
 $(document).on('ready', function(){
 
     $('#ESModal').on('shown.bs.modal', function () {
@@ -110,7 +111,7 @@ $(document).on('ready', function(){
         urlAPI = "{!! route('oms.getAllESBrandModals') !!}";
         requestData = {
             'limit' : '1000',
-                    'page' : '0'
+            'page' : '0'
             }
     $.ajax({
     headers: {
@@ -173,69 +174,128 @@ $(document).on('ready', function(){
             'max-width':'80%',
             'max-height':'80%',
     });
+    
+    
+    loadMMBrand();
+    
+    $("#btn-search").on('click', function(){
+        loadMMBrand();
+    });
+    
+    $("#previous-btn").on('click',function(){
+        var page = parseInt($("#page").val());
+        if(page <= 1){
+            var previousPage = page;
+            $("#previous-btn").attr('disable',true);
+            $("#next-btn").attr('disable',false);
+        }else{
+            var previousPage = page-1;
+            $("#previous-btn").attr('disable',false);
+            $("#next-btn").attr('disable',false);
+        }
+        
+        $("#page").val(previousPage);
+        loadMMBrand();
+    });
+    
+    $("#first-btn").on('click',function(){
+        $("#page").val(1);
+        loadMMBrand();
+    });
+    
+    $("#next-btn").on('click',function(){
+        var page = parseInt($("#page").val());
+        if(page >= $("#max_page").val()){
+            var nextPage = $("#max_page").val();
+            $("#next-btn").attr('disable',true);
+            $("#previous-btn").attr('disable',false);
+        }else{
+            var nextPage = page+1;
+            $("#next-btn").attr('disable',false);
+            $("#previous-btn").attr('disable',false);
+        }
+        
+        $("#page").val(nextPage);
+        loadMMBrand();
+    });
+    
+    $("#last-btn").on('click',function(){
+        $("#page").val($("#max_page").val());
+        $("#next-btn").attr('disable',true);
+        loadMMBrand();
+    });
+    
+    function loadMMBrand(){
         urlAPI = "{!! route('oms.getAllMPBrandModals') !!}";
         requestData = {
             'brandMarketplace' : $("#brandMarketplace").val(),
-            }
-    $.ajax({
-    headers: {
-    'X-CSRF-TOKEN': $('#token').val(),
-    },
-            data: requestData,
-            url: urlAPI,
-            type: 'post',
-            beforeSend: function() {
-                $("#reloadDiv").show();
-            },
-            complete: function() {
-                $("#reloadDiv").hide();
-            },
-            error : function(){
-              alert('Time Out, please try again');  
-            },
-            success: function(data) {
-                
-            var dataResults = JSON.parse(data);
-                    var result = dataResults.results;
-                    var table = '';
-                    table += '<table id="MPProduct" class="table table-bordered table-striped">' +
-                    '<thead>' +
-                    '<tr>' +
-                    '<th width="80%">Brand</th>' +
-                    '<th width="20%">Action</th>' +
-                    '</tr>' +
-                    '</thead>' +
-                    '<tbody>';
-                    for (var index in result){
-            table += '<tr>' +
-                    '<td>' + result[index]['brand'] + '</td>' +
-                    '<td>' +
-                    '<button \n\
-                    data-brand="' + result[index]['brand'] + '" \n\
-                    data-brand-id="' + result[index]['id'] + '" \n\
-                    class="btn btn-mini mp-brand-btn">Pick</button>' +
-                    '</td>' +
-                    '</tr>';
-            }
-            table += '</tbody>' +
-                    '<tfoot>' +
-                    '<tr>' +
-                    '<th width="80%">Brand</th>' +
-                    '<th width="20%">Action</th>' +
-                    '</tr>' +
-                    '</tfoot>' +
-                    '</table>';
-                    $("#MPTableDiv").html(table);
-                    $("#MPProduct").DataTable();
-                    
-            $(".mp-brand-btn").on('click', function(){
-                    $("#brandMarketplace").val($(this).data('brand'));
-                    $("#brandMarketplaceID").val($(this).data('brand-id'));
-                    $("#MPModal").modal('toggle')
+            'limit' : 10,
+            'page' : $("#page").val(),
+            'q' : $("#searchMP").val(),
+            };
+        $.ajax({
+        headers: {
+        'X-CSRF-TOKEN': $('#token').val(),
+        },
+                data: requestData,
+                url: urlAPI,
+                type: 'post',
+                beforeSend: function() {
+                    $("#reloadDiv").show();
+                },
+                complete: function() {
+                    $("#reloadDiv").hide();
+                },
+                error : function(){
+                  alert('Time Out, please try again');  
+                },
+                success: function(data) {
+
+                        var dataResults = JSON.parse(data);
+                        $("#max_page").val(dataResults.total.totalpage);
+                        
+                        var result = dataResults.results;
+                        var table = '';
+                        table += '<table id="MPProduct" class="table table-bordered table-striped">' +
+                        '<thead>' +
+                        '<tr>' +
+                        '<th width="80%">Brand</th>' +
+                        '<th width="20%">Action</th>' +
+                        '</tr>' +
+                        '</thead>' +
+                        '<tbody>';
+                        for (var index in result){
+                table += '<tr>' +
+                        '<td>' + result[index]['brand'] + '</td>' +
+                        '<td>' +
+                        '<button \n\
+                        data-brand="' + result[index]['brand'] + '" \n\
+                        data-brand-id="' + result[index]['id'] + '" \n\
+                        class="btn btn-mini mp-brand-btn">Pick</button>' +
+                        '</td>' +
+                        '</tr>';
+                }
+                table += '</tbody>' +
+                        '<tfoot>' +
+                        '<tr>' +
+                        '<th width="80%">Brand</th>' +
+                        '<th width="20%">Action</th>' +
+                        '</tr>' +
+                        '</tfoot>' +
+                        '</table>';
+                        $("#MPTableDiv").html(table);
+
+                $(".mp-brand-btn").on('click', function(){
+                        $("#brandMarketplace").val($(this).data('brand'));
+                        $("#brandMarketplaceID").val($(this).data('brand-id'));
+                        $("#MPModal").modal('toggle')
+                });
+
+                }
             });
-            
-            }
-        });
+        
+        }
+        
     });
     
 }); 
@@ -288,9 +348,25 @@ $(document).on('ready', function(){
                 <h4 class="modal-title">MarketPlace Brand</h4>
             </div>
             <div class="modal-body">
-                <div class="table-responsive" id='MPTableDiv' align="center">
-                    <img src="{{URL::asset('images/reload.gif')}}" id="reloadDiv">
-                    <!-- Modals Content MP Brand -->
+                <div class='container'>
+                    <div class='row col-md-10 col-xs-10'>
+                    <div class='pull-right'>
+                        <input type='text' id='searchMP' name='searchMP'>
+                        <button class='btn btn-default' id='btn-search'><span class='glyphicon glyphicon-search'></span></button>
+                    </div>
+                    </div>
+                    <div class='row col-md-10 col-xs-10'>
+                    <div class="table-responsive" id='MPTableDiv' align="center">
+                        <img src="{{URL::asset('images/reload.gif')}}" id="reloadDiv">
+                        <!-- Modals Content MP Brand -->
+                    </div>
+                        <button class='btn btn-default' id='first-btn'><< First</button>
+                        <button class='btn btn-default' id='previous-btn'>< Previous</button>
+                        <input type='text' readonly="true" disabled="true" size='5' id='page' value='1'>
+                        <input type='hidden' id='max_page'>
+                        <button class='btn btn-default' id='next-btn'>Next ></button>
+                        <button class='btn btn-default' id='last-btn'>Last >></button>
+                    </div>
                 </div>
             </div>
             <div class="modal-footer">

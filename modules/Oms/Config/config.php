@@ -2,7 +2,7 @@
 
 return [
     'sandbox' => [
-        'host' => 'http://api.sb.mataharimall.com',
+        'host' => 'http://apiseller.mataharimall.net',
     ],
     'prod' => [
         'host' => 'https://apiseller.mataharimall.com',

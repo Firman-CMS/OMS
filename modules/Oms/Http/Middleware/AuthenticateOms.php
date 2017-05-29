@@ -4,6 +4,8 @@ namespace Modules\Oms\Http\Middleware;
 
 use Closure;
 use Illuminate\Support\Facades\Auth;
+use Route;
+use Session;
 
 class AuthenticateOms
 {
@@ -17,12 +19,8 @@ class AuthenticateOms
      */
     public function handle($request, Closure $next, $guard = null)
     {
-        if (Auth::guard($guard)->guest()) {
-            if ($request->ajax() || $request->wantsJson()) {
-                return response('Unauthorized.', 401);
-            } else {
-                return redirect()->guest('/oms')->with('message','Session Expired');
-            }
+        if(!in_array(Route::currentRouteAction(), Session::get('permissions'))) {
+            return Response('Unauthorized', 401);
         }
 
         return $next($request);
