@@ -11,5 +11,10 @@ return [
     'prod' => [
         'host' => 'https://apiseller.mataharimall.com',
     ],
+    'service_url' => [
+        'host' => 'http://dem.es.id/apiv1/',
+        'dev' => 'http://dev.dem/apiv1/',
+    ],
+    
 ];
         

@@ -55,6 +55,10 @@ Route::group(['middleware' => ['web','authOms'], 'prefix' => 'oms', 'namespace' 
     Route::get('/editcolorMP/{ID?}', ['as' => 'oms.editColorMP', 'uses' => 'DashboardController@editColorMP']);
     Route::get('/editcategoryMP/{ID?}', ['as' => 'oms.editCategoryMP', 'uses' => 'DashboardController@editCategoryMP']);
     
+    /* Store MP*/ 
+    Route::get('/storeMP/{page?}', ['as' => 'oms.storeMP', 'uses' => 'DashboardController@storeMP']);
+
+
     /* Config */
     Route::get('/configuration', ['as' => 'oms.configuration', 'uses' => 'DashboardController@configuration']);
     Route::get('/changepassword', ['as' => 'oms.changepassword', 'uses' => 'DashboardController@changePassword']);

@@ -329,6 +329,21 @@ class Cms_model {
         }
         
     }
+
+    public static function getAllStoreMapping() {
+
+        $sql = DB::table('oms_store_mapping AS OSM')
+        ->leftJoin('oms_marketplace AS OMP','OMP.marketplace_id','=', 'OSM.marketplace_id')
+        ->leftJoin('es_store AS ESS','ESS.id','=', 'OSM.store_id')
+        ->leftJoin('location_store AS LS','LS.id','=', 'OSM.location_id')
+        ->select('OSM.*','OMP.marketplace_name','ESS.name', 'LS.kota');
+        // $sql->where('OSM.marketplace_id', '=', 1);       
+        // if($marketPlaceID !== ''){
+        //     $sql->where('M.marketplace_id', '=', $marketPlaceID);
+        // }
+
+        return $sql->get();
+    }
     
     public static function updateBrandMapping($brandParam){
         $brandMappingID = isset($brandParam['brandMappingID'])? $brandParam['brandMappingID'] : '';

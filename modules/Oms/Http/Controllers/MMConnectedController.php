@@ -15,12 +15,12 @@ class MMConnectedController extends OmsController {
 
     private $session;
 
-    public function __construct(Request $request) {
-        $this->session = $request->session()->all();
-        if (!session()->has('userID')) {
-            $this->middleware('authOms', ['except' => 'getLogout']);
-        }
-    }
+    // public function __construct(Request $request) {
+    //     $this->session = $request->session()->all();
+    //     if (!session()->has('userID')) {
+    //         $this->middleware('authOms', ['except' => 'getLogout']);
+    //     }
+    // }
     
     public static function getMMBrand($string='') {
         $defaultConfig = \Config::get('global');
@@ -311,5 +311,7 @@ class MMConnectedController extends OmsController {
             return json_encode($response);
         }
     }
+
+    Pu
     
 }

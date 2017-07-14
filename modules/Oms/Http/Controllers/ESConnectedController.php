@@ -98,8 +98,11 @@ class ESConnectedController extends OmsController {
             $param .= '&product_id=' . $productID;
         }
 
-        $service_url = 'http://dem.es.id/apiv1/product?' . $param;
+        $defaultConfig = \Config::get('global');
+        $apiConfig = $defaultConfig['service_url']['host'];
 
+        $service_url = $apiConfig.'product?' . $param;
+        // var_dump($service_url);die;
         $curl = curl_init($service_url);
         curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
         curl_setopt($curl, CURLOPT_USERPWD, "es:escom"); //Your credentials goes here
@@ -113,6 +116,25 @@ class ESConnectedController extends OmsController {
         curl_close($curl);
 
         return json_encode($response);
+
+        // $curl = curl_init();
+        // curl_setopt($curl, CURLOPT_URL, $service_url);
+        // curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
+        // curl_setopt($curl, CURLOPT_USERPWD, "es:escom"); //Your credentials goes here
+        // curl_setopt($curl, CURLOPT_HTTPHEADER, array(
+        //     'Content-Type: application/json',
+        //     'Accept: application/json'
+        //   ));
+        // curl_setopt($curl, CURLOPT_POST, 1);
+        // curl_setopt($curl, CURLOPT_POSTFIELDS, '');
+        // curl_setopt($curl, CURLOPT_TIMEOUT, 15);
+        // curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+
+        // $curl_response = curl_exec($curl);
+        // $response = json_decode($curl_response);
+        // curl_close($curl);
+
+        // return json_encode($response);
     }
     
     public function getESBrand($limit = '', $page = '', $brandName = '') {
@@ -131,7 +153,10 @@ class ESConnectedController extends OmsController {
             $param .= '&brand=' . $brandName;
         }
 
-        $service_url = 'http://dem.es.id/apiv1/product/brand?' . $param;
+        $defaultConfig = \Config::get('global');
+        $apiConfig = $defaultConfig['service_url']['host'];
+
+        $service_url = $apiConfig.'product/brand?' . $param;
         
         $curl = curl_init($service_url);
         curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
@@ -222,7 +247,7 @@ class ESConnectedController extends OmsController {
         $session = $this->session;
         $search = $request->searchParam;
 
-        $productArray = $this->getESProduct(1, 0, $search, '');
+        $productArray = $this->getESProduct(10, 0, $search, '');
         return view('oms::productES', compact('session', 'productArray'));
     }
 

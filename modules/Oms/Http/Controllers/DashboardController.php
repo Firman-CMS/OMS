@@ -422,6 +422,15 @@ class DashboardController extends OmsController {
                 
         return view('oms::categoryMP', compact('session','categoryArray'));
     }
+
+    public function storeMP($page = '') {
+        $session = $this->session;
+        $storeArray = [];
+        $storeArray = Cms_model::getAllStoreMapping();        
+        
+        // print_r($storeArray); die;        
+        return view('oms::storeMP', compact('session','storeArray'));
+    }
     
     public function editBrandMP($brand = '') {
         $session = $this->session;
@@ -570,6 +579,7 @@ class DashboardController extends OmsController {
     }
     
     public function saveProduct(Request $request) {
+        print_r($request);die;
         $session = $this->session;
         
         $productID = $request->productID;
@@ -675,6 +685,9 @@ class DashboardController extends OmsController {
         if ($getProduct > 0) {
             if($marketPlace == '1'){
                 $pushMM = MMConnectedController::updateProductMM($productArray);
+                // $pushMM = new MMConnectedController;
+                // $pushMM->updateProductMM($productArray);
+
                 $pushStatus = json_decode($pushMM);
 
                 if(isset($pushStatus->errorMessage) && $pushStatus->errorMessage !== ''){
@@ -691,7 +704,9 @@ class DashboardController extends OmsController {
             $message = "Product ". $productArray['productName'] . " have been updated";
         } else {
             if($marketPlace == '1'){
-                $pushMM = MMConnectedController::createProductMM($productArray);
+                // $pushMM = MMConnectedController::createProductMM($productArray);
+                $pushMM = new MMConnectedController;
+                $pushMM = $pushMM->createProductMM($productArray);
                 $pushStatus = json_decode($pushMM);
 
                 if(isset($pushStatus->errorMessage) && $pushStatus->errorMessage !== ''){
@@ -749,8 +764,10 @@ class DashboardController extends OmsController {
     }
     
     public function getOrderList(Request $request){
-        $startDate = $request->startDate;
-        $endDate = $request->endDate;
+        $session = $this->session;
+
+        $startDate = $request->startdate;
+        $endDate = $request->enddate;
         $marketPlace = $request->marketPlace;
 
         $orderArray = [];
@@ -767,7 +784,7 @@ class DashboardController extends OmsController {
                 "deliveryslipstatus" => "all",
                 "q" => ""
             ];
-
+            // print_r($parameter);die;
             $orderArray = MMCgetOrderListMM($parameter);
         }
         return $orderArray;

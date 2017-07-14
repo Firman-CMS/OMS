@@ -73,6 +73,11 @@
                         <i class="fa fa-database"></i> <span>Product</span>
                     </a>
                 </li>
+                <li>
+                    <a href="{{route('oms.storeMP')}}">
+                        <i class="fa fa-database"></i> <span>Store</span>
+                    </a>
+                </li>
             </ul>            
         </li>
         <li class="treeview">

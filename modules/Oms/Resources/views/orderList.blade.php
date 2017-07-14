@@ -27,13 +27,15 @@
             <div class="box-body">
                 
                 <div class="row">
+                <form name='form' id='form' action="{{route('oms.getOrderList')}}" method="post" enctype="multipart/form-data">
+                <input type="hidden" id="token" name="_token" value="{{{ csrf_token() }}}" />
                     <div class = 'col-md-6'>
                         <div class='row'>
                             <div class='col-md-1 col-xs-1'>
                                 <label>From</label>
                             </div>
                             <div class='col-md-4 col-xs-4'>
-                                <input type="text" id="startdate" value="{{date('Y-m-01')}}">
+                                <input type="text" id="startdate" name="startdate" value="{{date('Y-m-01')}}">
                             </div>
                         </div>
                         <div class='row'>
@@ -41,7 +43,7 @@
                                 <label>To</label>
                             </div>
                             <div class='col-md-4 col-xs-4'>
-                                <input type="text" id="enddate" value="{{date('Y-m-d')}}">
+                                <input type="text" id="enddate" name="enddate" value="{{date('Y-m-d')}}">
                             </div>
                         </div>
                     </div>
@@ -58,8 +60,21 @@
                                 @endforeach
                             </select>
                         </div>
+
                     </div>
-                    
+                    <div class='col-md-6 col-xs-12'>
+                        <div class='col-md-3 col-xs-3'>
+                            <label></label>
+                        </div>
+                        <div class='row'>
+                            <div class='col-md-6 col-xs-6'>
+                                <div class="box-footer">
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                </form>    
                     
                 </div>
                 <br>
